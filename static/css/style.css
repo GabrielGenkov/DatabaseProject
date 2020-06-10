@@ -41,17 +41,29 @@ li a:hover:not(.activ){
 	background-color: #111;
 }
 .red{
-	background-color: red;
+	background-color: #FFA500;
 }
 .active{
 	background-color: red;
-	border-right: none;
 }
 .activ{
 	background-color: red;
-	border-left:1px solid #bbb;
 }
 .acti{
+	background-color: red;
+}
+.movies{
+	background-color: red;
+}
+.mymovies{
+	background-color: red;
+}
+.assignedmovies{
+	border-right: none;
+	background-color: red;
+}
+.addmovie{
+	border-right: none;
 	background-color: red;
 }
 
