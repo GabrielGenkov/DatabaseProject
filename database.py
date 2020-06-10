@@ -19,9 +19,11 @@ CREATE TABLE IF NOT EXISTS Movies
     (
 		id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 		title	TEXT NOT NULL,
-		director	TEXT NOT NULL,
-		ageLimit	INTEGER
-		
+		directorId	INTEGER NOT NULL,
+		ageLimit	INTEGER,
+                date    DATETIME NOT NULL,
+                
+		FOREIGN KEY(directorId) REFERENCES Users(id)
     )
 ''')
 conn.cursor().execute('''

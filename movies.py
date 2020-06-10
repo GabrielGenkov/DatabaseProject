@@ -1,11 +1,12 @@
 from database import DB
 class Movies:
     
-    def __init__(self, id, title, director, ageLimit):
+    def __init__(self, id, title, director, ageLimit, date):
         self.id = id
         self.title = title
         self.director = director
         self.ageLimit = ageLimit
+        self.date = date
         
     def create(self):
         with DB() as db:
@@ -16,3 +17,15 @@ class Movies:
     def delete(self):
         with DB() as db:
             db.execute('DELETE FROM posts WHERE id = ?', (self.id,))
+
+    @staticmethod
+    def dateExpired():
+            with  DB() as db:
+                    row = db.execute("SELECT * FROM Movies WHERE date < datetime('now')").fetchall()
+            return [Movies(*row) for row in rows]
+        
+    @staticmethod
+    def dateActive():
+            with  DB() as db:
+                    row = db.execute("SELECT * FROM Movies WHERE date >= datetime('now')").fetchall()
+            return [Movies(*row) for row in rows]

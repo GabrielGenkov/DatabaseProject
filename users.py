@@ -28,5 +28,15 @@ class Users:
         def userAllMovies(self):
                 with DB() as db:
                         values = (self.id)
-                        row = db.execute('SELECT * FROM Movies INNER JOIN Third ON Movies.id = Third.movieId WHERE ? = userId', values).fetchall()
-                return [Movies(*row) for row in rows] 
+                        row = db.execute('SELECT * FROM Movies INNER JOIN Third ON Movies.id = Third.movieId WHERE ? = Third.userId', values).fetchall()
+                return [Movies(*row) for row in rows]
+
+        @staticmethod
+        def loadUserId(Id):
+                with DB() as db:
+                        values = (Id)
+                        row = db.execute('SELECT * FROM Users WHERE ? = id', values).fetchone()
+                return Users(*row)
+
+     
+                        
