@@ -87,12 +87,13 @@ li a:hover:not(.activ){
 }
 .active{
 	background-color: red;
+	border-left:1px solid #bbb;
 	border-right: none;
 }
-.activ{
+/*.activ{
 	background-color: red;
 	border-left:1px solid #bbb;
-}
+}*/
 .acti{
 	background-color: red;
 }
