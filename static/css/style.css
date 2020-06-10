@@ -1,0 +1,57 @@
+html{
+	background: url("back.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.header img{
+	margin: 0;
+	width: 100%;
+}
+
+nav{
+	font-size: 19px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+
+}
+
+li{
+	float: left;
+}
+
+li a{
+	border-right:2px solid #bbb;
+	display: block;
+	color: white;
+	padding: 15px 17px;
+	text-decoration: none;
+}
+
+
+li a:hover:not(.active){
+	background-color: #111;
+}
+
+li a:hover:not(.activ){
+	background-color: #111;
+}
+.red{
+	background-color: red;
+}
+.active{
+	background-color: red;
+	border-right: none;
+}
+.activ{
+	background-color: red;
+	border-left:1px solid #bbb;
+}
+.acti{
+	background-color: red;
+}
+
