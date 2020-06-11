@@ -106,3 +106,8 @@ button {
 		width: 20%;
 		border-radius: 12%;
 }
+
+button:hover{
+	background-color: black;
+}
+
