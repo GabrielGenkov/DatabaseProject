@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href=style.css>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 	</head>
 	<body>
 		<div class="header">
-			<img class="header" src="header.png">
+			<img class="header" src="{{ url_for('static', filename='style/images/header.png')}}">
 		</div>
 		<nav>
-			<li class="red"><a href="#home">Home</a></li>
-			<li class="movies"><a href="#movies">Movies</a></li>
-			<li class="mymovies"><a href="#mymovies">My Movies</a></li>
-			<li class="assignedmovies"><a href="#assignedmovies">Assigned Movies</a></li>
-			<li class="addmovie"><a href="#addmovie">Add Movie</a></li>
-			<li style="float:right"><a class="acti" href="#logout">Log out</a></li>
-			<li style="float:right"><a class="active" href="#register">Register</a></li>
-			<li style="float:right"><a class="activ" href="#login">Log in</a></li>
+			<li class="red"><a href="/">Home</a></li>
+			<li class="movies"><a href="/movies">Movies</a></li>
+			{% if user != None %}
+			<li class="mymovies"><a href="/mymovies">My Movies</a></li>
+			<li class="assignedmovies"><a href="/assignedmovies">Assigned Movies</a></li>
+			<li class="addmovie"><a href="/addmovie">Add Movie</a></li>
+			<li style="float:right"><a class="acti" href="/logout">Log out</a></li>
+			{% elif user == None %}
+			<li style="float:right"><a class="active" href="/register">Register</a></li>
+			<li style="float:right"><a class="activ" href="/login">Log in</a></li>
+			{% endif %}
 		</nav>
-		
-		
 	</body>
-</html> 
+</html>

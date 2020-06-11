@@ -20,12 +20,12 @@ class Movies:
 
     @staticmethod
     def dateExpired():
-            with  DB() as db:
-                    row = db.execute("SELECT * FROM Movies WHERE date < datetime('now')").fetchall()
-            return [Movies(*row) for row in rows]
+        with  DB() as db:
+                row = db.execute("SELECT * FROM Movies WHERE date < datetime('now')").fetchall()
+        return [Movies(*row) for row in rows]
         
     @staticmethod
     def dateActive():
-            with  DB() as db:
-                    row = db.execute("SELECT * FROM Movies WHERE date >= datetime('now')").fetchall()
-            return [Movies(*row) for row in rows]
+        with  DB() as db:
+            row = db.execute("SELECT * FROM Movies WHERE date >= datetime('now')").fetchall()
+        return [Movies(*row) for row in rows]
