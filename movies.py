@@ -29,3 +29,11 @@ class Movies:
         with  DB() as db:
             row = db.execute("SELECT * FROM Movies WHERE date >= datetime('now')").fetchall()
         return [Movies(*row) for row in rows]
+        
+    @staticmethod
+	def edit(id, title):
+        with DB() as db:
+        	values = (title)
+            db.execute('''
+            UPDATE movies SET title = ? WHERE id = ?''', values, id)
+		return self
