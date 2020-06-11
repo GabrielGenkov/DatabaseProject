@@ -52,6 +52,10 @@ button {
 		width: 20%;
 		border-radius: 12%;
 }
+button:hover{
+	background-color: black;
+
+}
 nav{
 	font-size: 19px;
 	list-style-type: none;
@@ -83,10 +87,10 @@ li a:hover:not(.activ){
 	background-color: #111;
 }
 .red{
-	background-color: #FFA500;
+	background-color: red;
 }
 .active{
-	background-color: red;
+	background-color: #FFA500;
 }
 .activ{
 	background-color: red;
