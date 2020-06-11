@@ -61,21 +61,48 @@ def logout():
 	session.pop("user", None)
 	return redirect('/')
 	
-@app.route('/myAssignments')
+@app.route('/assignedmovies')
 def myAssignments():
 	if not "user" in session:
 		return redirect('/')
 	user = Users.loadUserId(session["user"])
-	return render_template('myAssignments.html',user = user, 
+	return render_template('assignedmovies.html',user = user, 
 	movies = user.userAllMovies())
 	
-@app.route('/myMovies')
+@app.route('/mymovies')
 def myMovies():
 	if not "user" in session:
 		return redirect('/')
 	user = Users.loadUserId(session["user"])
-	return render_template('myMovies.html',user = user, 
-	movies = user.findDirectorMovies())
+	return render_template('mymovies.html',user = user, 
+	movies = Movies.findDirector(user.id))
+	
+@app.route('/movies')
+def movies():
+	id = None
+	if "user" in session:
+		id = session["user"]
+	return render_template('allmovies.html',user = Users.loadUserId(id), 
+	movies = Movies.dateActive())
+	
+@app.route('/addmovie' ,methods=['GET', 'POST'])
+def add():
+	if not "user" in session:
+		return redirect('/')
+	if request.method == 'GET':
+		return render_template('addmovie.html', 
+		user = Users.loadUserId(session["user"]))
+	if request.method == 'POST':
+		values = (
+			None,
+			request.form['title'],
+			session["user"],
+			request.form['agelimit'],
+			request.form['moviedate']
+		)
+		movie = Movies(*values).create()
+		return redirect('/')
+
 
 if __name__ == '__main__':
 	app.run(debug = True)

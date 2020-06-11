@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Movies
 		title	TEXT NOT NULL,
 		directorId	INTEGER NOT NULL,
 		ageLimit	INTEGER,
-                date    DATETIME NOT NULL,
+        date    DATETIME NOT NULL,
                 
 		FOREIGN KEY(directorId) REFERENCES Users(id)
     )

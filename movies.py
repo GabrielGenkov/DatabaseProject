@@ -1,5 +1,5 @@
 from database import DB
-
+#from users import Users
 
 class Movies:
     
@@ -12,8 +12,8 @@ class Movies:
         
     def create(self):
         with DB() as db:
-            values = (self.title, self.director, self.ageLimit)
-            row = db.execute('INSERT INTO Movies (title, director, ageLimit) VALUES (?, ?, ?)', values)
+            values = (self.title, self.director, self.ageLimit, self.date)
+            row = db.execute('INSERT INTO Movies (title, directorId, ageLimit, date) VALUES (?, ?, ?, ?)', values)
         return self
     
     def delete(self):
@@ -38,7 +38,9 @@ class Movies:
             values = (title)
             db.execute('UPDATE Movies SET title = ? WHERE id = ?', values, id)
 
-    def findDirector(self):
+    @staticmethod
+    def findDirector(id):
         with DB() as db:
-            rows = db.execute('SELECT * FROM Movies WHERE directorId = ?', (self.director,)).fetchall()
+            rows = db.execute('SELECT * FROM Movies WHERE directorId = ?', (id,)).fetchall()
         return [Movies(*row) for row in rows]
+

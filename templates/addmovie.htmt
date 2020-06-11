@@ -20,7 +20,7 @@
 			<li style="float:right"><a class="activ" href="/login">Log in</a></li>
 			{% endif %}
 		</nav>
-		<form action="/addmovie" method="post">
+		<form action="login" method="post">
 			<label><b>Title</b></label>
       <br>
 			<input type="title" name="title" placeholder="Enter Title" required>
