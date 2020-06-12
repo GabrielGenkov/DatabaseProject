@@ -92,17 +92,18 @@ def movies():
 	movies = Movies.dateActive())
 
 
-@app.route('/addmovie' ,methods=['GET', 'POST'])
+@app.route('/addmovie',methods=['GET', 'POST'])
 def add():
 	if not "user" in session:
 		return redirect('/')
 	if request.method == 'GET':
-		return render_template('addmovie.html', 
+		return render_template('addmovie.html',
 		user = Users.loadUserId(session["user"]))
 	if request.method == 'POST':
 		values = (
 			None,
 			request.form['title'],
+			request.form['description'],
 			session["user"],
 			request.form['agelimit'],
 			request.form['moviedate']
@@ -118,5 +119,28 @@ def assignForMovie(id):
 	return redirect('/')
 
 
+@app.route('/<int:id>/edit', methods=['GET', 'POST'])
+def editMovie(id):
+	if not "user" in session:
+		return redirect('/')
+	if session["user"] is not Movies.findMovie(id).director:
+		return redirect('/')
+	if request.method == 'GET':
+		return render_template('editmovie.html', movie = Movies.findMovie(id))
+	if request.method == 'POST':
+		values = (
+			id,
+			request.form['title'],
+			request.form["description"],
+			session["user"],
+			request.form['agelimit'],
+			request.form['moviedate']
+		)
+		movie = Movies(*values).edit()
+		return redirect('/mymovies')
+
+
 if __name__ == '__main__':
 	app.run(debug = True)
+
+
