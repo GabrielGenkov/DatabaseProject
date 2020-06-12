@@ -8,28 +8,36 @@
 			<img class="header" src="{{ url_for('static', filename='style/images/header.png')}}">
 		</div>
 		<nav>
-			<li class="red"><a href="/">Home</a></li>
+			<li class="red"><a href="/home">Home</a></li>
 			<li class="movies"><a href="/movies">Movies</a></li>
 			{% if user != None %}
 			<li class="mymovies"><a href="/mymovies">My Movies</a></li>
 			<li class="assignedmovies"><a href="/assignedmovies">Assigned Movies</a></li>
-			<li class="editmovie"><a href="/editmovie">Edit Movie</a></li>
+			<li class="addmovie"><a href="/addmovie">Add Movie</a></li>
 			<li style="float:right"><a class="acti" href="/logout">Log out</a></li>
 			{% elif user == None %}
 			<li style="float:right"><a class="active" href="/register">Register</a></li>
 			<li style="float:right"><a class="activ" href="/login">Log in</a></li>
 			{% endif %}
 		</nav>
-		{% for movie in movies %}
-            <div class="card">
-                    <p>Title: {{movie.title}}</p>
-                    <p>Director: {{movie.director}}</p>
-                    <p>Age Limit: {{movie.ageLimit}}</p>
-                    <form class="assign" action="">
-                        <button type="submit" value="submit">Edit</button>
-                    </form>
-            </div>
-		{% endfor %}
-
+		<form action="/{{movie.id}}/edit" method="post">
+			<label><b>Edit Title</b></label>
+      <br>
+			<input type="text" name="title" placeholder="Edit Title" value="{{movie.title}}" required>
+      <br>
+      		<label><b>Edit Description</b></label>
+      <br>
+			<input type="text" name="editdescription" placeholder="edit Description" value="{{movie.description}}" required>
+      <br>
+			<label><b>Edit Age Limit</b></label>
+      <br>
+			<input type="agelimit" name="editagelimit" placeholder="Edit Age Limit" value={{movie.ageLimit}}>
+      <br>
+			<input type="datetime-local" name="editdate" placeholder="Edit Movie Date" value="{{movie.date}}" required>
+      <br>	  
+			<button type ="submit">Edit</button>
+			
+        </form>
+		
 	</body>
-</html>
+</html> 
