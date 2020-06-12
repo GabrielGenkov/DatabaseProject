@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style/edit.css') }}">
+	</head>
+	<body>
+		<div class="header">
+			<img class="header" src="{{ url_for('static', filename='style/images/header.png')}}">
+		</div>
+		<nav>
+			<li class="red"><a href="/home">Home</a></li>
+			<li class="movies"><a href="/movies">Movies</a></li>
+			{% if user != None %}
+			<li class="mymovies"><a href="/mymovies">My Movies</a></li>
+			<li class="assignedmovies"><a href="/assignedmovies">Assigned Movies</a></li>
+			<li class="addmovie"><a href="/addmovie">Add Movie</a></li>
+			<li style="float:right"><a class="acti" href="/logout">Log out</a></li>
+			{% elif user == None %}
+			<li style="float:right"><a class="active" href="/register">Register</a></li>
+			<li style="float:right"><a class="activ" href="/login">Log in</a></li>
+			{% endif %}
+		</nav>
+		<form action="/addmovie" method="post">
+			<label><b>Edit Title</b></label>
+      <br>
+			<input type="title" name="title" placeholder="Edit Title" required>
+      <br>
+      		<label><b>Edit Description</b></label>
+      <br>
+			<input type="description" name="editdescription" placeholder="edit Description" required>
+      <br>
+			<label><b>Edit Age Limit</b></label>
+      <br>
+			<input type="agelimit" name="editagelimit" placeholder="Edit Age Limit">
+      <br>
+			<input type="datetime-local" name="editdate" placeholder="Edit Movie Date" required>
+      <br>	  
+			<button type ="edit">Edit</button>
+			
+        </form>
+		
+	</body>
+</html> 
