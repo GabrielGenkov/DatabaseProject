@@ -39,7 +39,7 @@ class Movies:
     def edit(self):
         with DB() as db:
             values = (self.title, self.description, self.ageLimit, self.date, self.id)
-            db.execute('UPDATE Movies SET title = ? description = ? ageLimit = ? date = ? WHERE id = ?', values)
+            db.execute('UPDATE Movies SET title = ?, description = ?, ageLimit = ?, date = ? WHERE id = ?', values)
 
     @staticmethod
     def findDirector(id):

@@ -126,7 +126,7 @@ def editMovie(id):
 	if session["user"] is not Movies.findMovie(id).director:
 		return redirect('/')
 	if request.method == 'GET':
-		return render_template('editmovie.html', movie = Movies.findMovie(id))
+		return render_template('editmovies.html', movie = Movies.findMovie(id))
 	if request.method == 'POST':
 		values = (
 			id,
