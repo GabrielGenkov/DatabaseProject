@@ -30,7 +30,7 @@ class Users:
     def userAllMovies(self):
         with DB() as db:
             values = (self.id,)
-            rows = db.execute('SELECT Movies.id, Movies.title, Movies.directorId, Movies.ageLimit, Movies.date FROM Movies INNER JOIN Third ON Movies.id = Third.movieId WHERE Third.userId = ?'
+            rows = db.execute('SELECT Movies.id, Movies.title, Movies.description, Movies.directorId, Movies.ageLimit, Movies.date FROM Movies INNER JOIN Third ON Movies.id = Third.movieId WHERE Third.userId = ?'
                               , values).fetchall()
             print(rows)
         return [Movies(*row) for row in rows]
