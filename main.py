@@ -8,12 +8,14 @@ app = Flask(__name__)
 
 app.secret_key = "CSDZXloikceawsdxlnoijkmcewsdxcewsdxopuifasdgewqr40[9wq2[OPIFE"
 
+
 @app.route('/')
 def index():
 	id = None
 	if "user" in session:
 		id = session["user"]
 	return render_template('index.html',user = Users.loadUserId(id))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -38,6 +40,7 @@ def register():
 			return redirect('/')
 		return redirect('/register')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'GET':
@@ -60,7 +63,8 @@ def login():
 def logout():
 	session.pop("user", None)
 	return redirect('/')
-	
+
+
 @app.route('/assignedmovies')
 def myAssignments():
 	if not "user" in session:
@@ -68,7 +72,8 @@ def myAssignments():
 	user = Users.loadUserId(session["user"])
 	return render_template('assignedmovies.html',user = user, 
 	movies = user.userAllMovies())
-	
+
+
 @app.route('/mymovies')
 def myMovies():
 	if not "user" in session:
@@ -76,7 +81,8 @@ def myMovies():
 	user = Users.loadUserId(session["user"])
 	return render_template('mymovies.html',user = user, 
 	movies = Movies.findDirector(user.id))
-	
+
+
 @app.route('/movies')
 def movies():
 	id = None
@@ -84,7 +90,8 @@ def movies():
 		id = session["user"]
 	return render_template('allmovies.html',user = Users.loadUserId(id), 
 	movies = Movies.dateActive())
-	
+
+
 @app.route('/addmovie' ,methods=['GET', 'POST'])
 def add():
 	if not "user" in session:
@@ -102,6 +109,13 @@ def add():
 		)
 		movie = Movies(*values).create()
 		return redirect('/')
+
+
+@app.route('/<int:id>/assign')
+def assignForMovie(id):
+	user = Users.loadUserId(session["user"])
+	third = Users.userAssign(user, id)
+	return redirect('/')
 
 
 if __name__ == '__main__':

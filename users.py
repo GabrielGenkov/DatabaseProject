@@ -21,17 +21,18 @@ class Users:
         with DB() as db:
             db.execute('DELETE FROM Users WHERE id = ?', (self.id,))
 
-    def userAssign(self, movie):
+    def userAssign(self, movieId):
         with DB() as db:
-            values = (movie.id, self.id)
+            values = (movieId, self.id)
             row = db.execute('INSERT INTO Third (movieId, userId) VALUES(?, ?)', values)
         return self
 
     def userAllMovies(self):
         with DB() as db:
             values = (self.id,)
-            rows = db.execute(
-                'SELECT * FROM Movies INNER JOIN Third ON Movies.id = Third.movieId WHERE Third.userId = ?', values).fetchall()
+            rows = db.execute('SELECT Movies.id, Movies.title, Movies.directorId, Movies.ageLimit, Movies.date FROM Movies INNER JOIN Third ON Movies.id = Third.movieId WHERE Third.userId = ?'
+                              , values).fetchall()
+            print(rows)
         return [Movies(*row) for row in rows]
 
     def findDirectorMovies(self):
@@ -39,14 +40,14 @@ class Users:
             values = (self.id,)
             rows = db.execute('SELECT * FROM Movies WHERE directorId = ?', values).fetchall()
         return [Movies(*row) for row in rows]
-        
+
     @staticmethod
     def loadUserId(Id):
         with DB() as db:
             values = (Id,)
             row = db.execute('SELECT * FROM Users WHERE id = ?', values).fetchone()
         if not row:
-        	return None
+            return None
         return Users(*row)
 
     @staticmethod
