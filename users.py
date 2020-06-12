@@ -67,3 +67,8 @@ class Users:
         if not row:
             return None
         return Users(*row)
+
+    def userUnassign(self, movieId):
+        with DB() as db:
+            values = (movieId, self.id)
+            row = db.execute('DELETE FROM Third WHERE movieId = ? AND userId = ?', values)

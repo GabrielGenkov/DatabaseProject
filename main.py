@@ -114,6 +114,8 @@ def add():
 
 @app.route('/<int:id>/assign')
 def assignForMovie(id):
+	if not "user" in session:
+		return redirect('/')
 	user = Users.loadUserId(session["user"])
 	third = Users.userAssign(user, id)
 	return redirect('/')
@@ -138,6 +140,15 @@ def editMovie(id):
 		)
 		movie = Movies(*values).edit()
 		return redirect('/mymovies')
+
+
+@app.route('/<int:id>/unassign')
+def unassignForMovie(id):
+	if not "user" in session:
+		return redirect('/')
+	user = Users.loadUserId(session["user"])
+	user.userUnassign(id)
+	return redirect('/')
 
 
 if __name__ == '__main__':
